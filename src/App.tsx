@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
-import { Faucet } from './features/Faucet/routes/Faucet'
+
+import { Faucet } from './features/Faucet/routes/Faucet';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -10,14 +11,13 @@ const queryClient = new QueryClient({
   },
 });
 
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Faucet/>
+      <Faucet />
       <Toaster position="top-center" richColors closeButton />
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -10,37 +10,34 @@ export const getAllJobs = async (): Promise<Job[]> => {
   return request.get('/faucet/jobs');
 };
 
-
-
 export type FaucetCSPRParams = {
-  publicKey: string
+  publicKey: string;
 };
 
-
 export interface Job {
-  id: string
-  name: string
-  data: Data
-  opts: Opts
-  progress: number
-  delay: number
-  timestamp: number
-  attemptsMade: number
-  returnvalue: Returnvalue
-  finishedOn: number
-  processedOn: number
+  id: string;
+  name: string;
+  data: Data;
+  opts: Opts;
+  progress: number;
+  delay: number;
+  timestamp: number;
+  attemptsMade: number;
+  returnvalue: Returnvalue;
+  finishedOn: number;
+  processedOn: number;
 }
 
 export interface Data {
-  toPublicKeyHex: string
+  toPublicKeyHex: string;
 }
 
 export interface Opts {
-  attempts: number
-  delay: number
-  timestamp: number
+  attempts: number;
+  delay: number;
+  timestamp: number;
 }
 
 export interface Returnvalue {
-  deployHash: string
+  deployHash: string;
 }
