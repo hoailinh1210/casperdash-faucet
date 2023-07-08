@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+
+import { useAccount, useDisconnect } from '@casperdash/usewallet';
 import { zodResolver } from '@hookform/resolvers/zod';
 import _ from 'lodash';
 import { useForm } from 'react-hook-form';
@@ -43,6 +46,8 @@ const validationSchema = z.object({
 });
 
 export const FaucetForm = () => {
+  const { publicKey } = useAccount();
+  const { disconnect } = useDisconnect();
   const form = useForm({
     resolver: zodResolver(validationSchema),
     defaultValues: {
@@ -63,6 +68,11 @@ export const FaucetForm = () => {
     faucetCSPRMutation.mutate(data);
   };
 
+  useEffect(() => {
+    if (!publicKey) return;
+    form.setValue('publicKey', publicKey);
+  }, [form, publicKey]);
+
   return (
     <Form {...form}>
       <form className="gap-1 w-full" onSubmit={form.handleSubmit(onSubmit)}>
@@ -82,7 +92,11 @@ export const FaucetForm = () => {
                 <FormItem>
                   <FormLabel>Public Key</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your public key" {...field} />
+                    <Input
+                      disabled
+                      placeholder="Enter your public key"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage>
                     {form.formState.errors.publicKey?.message}
@@ -114,9 +128,16 @@ export const FaucetForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter className="flex justify-center">
+          <CardFooter className="flex justify-center gap-10">
             <Button variant={'outline'} type="submit">
               {faucetCSPRMutation.isLoading ? 'Loading...' : 'Request 10 CSPR'}
+            </Button>
+            <Button
+              type="button"
+              variant={'outline'}
+              onClick={() => disconnect()}
+            >
+              Disconnect
             </Button>
           </CardFooter>
         </Card>

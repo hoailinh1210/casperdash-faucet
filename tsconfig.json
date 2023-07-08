@@ -23,7 +23,7 @@
       "~/public/*": ["public/*"]
     },
     "pretty": true,
-    "types": ["vitest/globals", "@testing-library/jest-dom"],
+    "types": ["@testing-library/jest-dom"],
     "incremental": true
   },
   "exclude": ["node_modules"],

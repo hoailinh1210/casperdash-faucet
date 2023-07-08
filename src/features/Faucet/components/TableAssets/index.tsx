@@ -30,7 +30,15 @@ const columns: ColumnDef<JobItem>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-left">
-          <MiddleTruncatedText>{row.getValue('publicKey')}</MiddleTruncatedText>
+          <a
+            href={`https://testnet.cspr.live/account/${row.getValue(
+              'publicKey'
+            )}`}
+          >
+            <MiddleTruncatedText>
+              {row.getValue('publicKey')}
+            </MiddleTruncatedText>
+          </a>
         </div>
       );
     },
@@ -49,9 +57,15 @@ const columns: ColumnDef<JobItem>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-left">
-          <MiddleTruncatedText>
-            {row.getValue('deployHash')}
-          </MiddleTruncatedText>
+          <a
+            href={`https://testnet.cspr.live/deploy/${row.getValue(
+              'deployHash'
+            )}`}
+          >
+            <MiddleTruncatedText>
+              {row.getValue('deployHash')}
+            </MiddleTruncatedText>
+          </a>
         </div>
       );
     },
@@ -84,7 +98,7 @@ export const TableAssets = () => {
       return {
         date: dayjs(item.timestamp).format('DD/MM/YYYY'),
         publicKey: item.data.toPublicKeyHex,
-        totalAmount: '4',
+        totalAmount: '10',
         status: status,
         deployHash: item.returnvalue ? item.returnvalue.deployHash : '',
       };
