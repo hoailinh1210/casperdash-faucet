@@ -32,6 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useGetAccountBalance } from '@/services/faucet/casperdash/user/hooks';
 import { useFaucetCSPR } from '@/services/faucet/faucet/hooks';
 import { validatePublicKey } from '@/utils/validator';
 
@@ -48,6 +49,10 @@ const validationSchema = z.object({
 export const FaucetForm = () => {
   const { publicKey } = useAccount();
   const { disconnect } = useDisconnect();
+  const { data: { balance } = { balance: 0 } } = useGetAccountBalance({
+    publicKey:
+      '0106ae2a9cd180f2160bd87ed4bf564f34dffc40d71870bd425800f00f1e450ce3',
+  });
   const form = useForm({
     resolver: zodResolver(validationSchema),
     defaultValues: {
@@ -90,7 +95,7 @@ export const FaucetForm = () => {
               name="publicKey"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Public Key</FormLabel>
+                  <FormLabel>Public Key (Testnet)</FormLabel>
                   <FormControl>
                     <Input
                       disabled
@@ -120,7 +125,9 @@ export const FaucetForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="CSPR">CSPR</SelectItem>
+                      <SelectItem value="CSPR">
+                        CSPR {balance ? `(${balance})` : '(...)'}
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -129,7 +136,7 @@ export const FaucetForm = () => {
             />
           </CardContent>
           <CardFooter className="flex justify-center gap-10">
-            <Button variant={'outline'} type="submit">
+            <Button type="submit">
               {faucetCSPRMutation.isLoading ? 'Loading...' : 'Request 10 CSPR'}
             </Button>
             <Button
