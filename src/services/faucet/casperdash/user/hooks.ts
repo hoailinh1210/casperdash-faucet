@@ -7,7 +7,7 @@ import { Account, WalletAccountBalance } from './type';
 import { getAccounts } from './user.service';
 
 type UseGetBalanceParams = {
-  publicKey?: string;
+  publicKey?: string | null;
 };
 
 const MOTE_RATE = 1000000000;
@@ -46,13 +46,13 @@ export const useGetAccountBalance = (
       WalletAccountBalance,
       unknown,
       WalletAccountBalance,
-      ['master_account_balance']
+      ['account_balance', string | null | undefined]
     >,
     'queryKey' | 'queryFn'
   >
 ) => {
   return useQuery(
-    ['master_account_balance'],
+    ['account_balance', publicKey],
     async () => {
       const accounts = await getAccounts({
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

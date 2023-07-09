@@ -98,7 +98,7 @@ export const TableAssets = () => {
       return {
         date: dayjs(item.timestamp).format('DD/MM/YYYY'),
         publicKey: item.data.toPublicKeyHex,
-        totalAmount: '10',
+        totalAmount: '10 CSPR',
         status: status,
         deployHash: item.returnvalue ? item.returnvalue.deployHash : '',
       };
@@ -109,35 +109,5 @@ export const TableAssets = () => {
     <div className="mt-10 w-full">
       <DataTable columns={columns} data={jobItems} />
     </div>
-    // <Table className="mt-10">
-    //   <TableHeader>
-    //     <TableRow>
-    //       <TableHead className="w-[100px]">Date</TableHead>
-    //       <TableHead>Public Key</TableHead>
-    //       <TableHead>Status</TableHead>
-    //       <TableHead>Deploy Hash</TableHead>
-    //       <TableHead>Amount</TableHead>
-    //     </TableRow>
-    //   </TableHeader>
-    //   <TableBody>
-    //     {jobItems.map((job: JobItem, index: number) => (
-    //       <TableRow key={`key-${index}`}>
-    //         <TableCell className="font-medium">{job.date}</TableCell>
-    //         <TableCell>
-    //           <MiddleTruncatedText>
-    //             {job.publicKey}
-    //           </MiddleTruncatedText>
-    //         </TableCell>
-    //         <TableCell>{job.status}</TableCell>
-    //         <TableCell>
-    //           <MiddleTruncatedText>
-    //             {job.deployHash}
-    //           </MiddleTruncatedText>
-    //         </TableCell>
-    //         <TableCell className="text-right">{job.totalAmount}</TableCell>
-    //       </TableRow>
-    //     ))}
-    //   </TableBody>
-    // </Table>
   );
 };

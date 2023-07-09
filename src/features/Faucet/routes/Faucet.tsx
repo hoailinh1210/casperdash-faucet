@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
-
 import { useAccount } from '@casperdash/usewallet';
-import { useQueryClient } from '@tanstack/react-query';
 
 import { FaucetForm } from '../components/FaucetForm';
 import { LoginDialog } from '../components/LoginDialog';
@@ -9,17 +6,11 @@ import { TableAssets } from '../components/TableAssets';
 import LogoImg from '@/assets/images/logo.png';
 
 export const Faucet = () => {
-  const queryClient = useQueryClient();
   const { status } = useAccount();
-
-  useEffect(() => {
-    queryClient.prefetchQuery(['master_account_balance']);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="flex flex-col h-screen items-center justify-between">
-      <div className="mt-10">
+      <div className="mt-10 p-10">
         {status === 'connected' ? (
           <div className="md:w-[600px]">
             <FaucetForm />
@@ -37,7 +28,7 @@ export const Faucet = () => {
         )}
       </div>
       <div>
-        <div className="h-10 text-center text-sm	">
+        <div className="h-10 text-center text-sm mt-2">
           © 2023: <a href="https://casperdash.io/">CasperDash Team</a>
         </div>
       </div>

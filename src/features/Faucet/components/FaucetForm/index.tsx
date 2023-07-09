@@ -7,7 +7,10 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
+import { SubmitButton } from './SubmitButton';
+import { useMintToken } from '../../hooks/useMintToken';
 import LogoImg from '@/assets/images/logo.png';
+import { MiddleTruncatedText } from '@/components/common/middle-truncated-text';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -46,6 +49,8 @@ const validationSchema = z.object({
   asset: z.string().optional(),
 });
 
+type FormData = z.infer<typeof validationSchema>;
+
 export const FaucetForm = () => {
   const { publicKey } = useAccount();
   const { disconnect } = useDisconnect();
@@ -68,9 +73,45 @@ export const FaucetForm = () => {
       toast.error(_.get(error, 'response.data.message', 'An error occurred'));
     },
   });
+  const mintTokenMutation = useMintToken({
+    onSuccess: (data) => {
+      toast.success(
+        <div>
+          <span>Faucet request sent successfully with deploy hash </span>
+          <a
+            href={`https://testnet.cspr.live/deploy/${data.deployHash}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="flex">
+              <MiddleTruncatedText>{data.deployHash}</MiddleTruncatedText>{' '}
+              <span>(Click here to view)</span>
+            </div>
+          </a>
+        </div>,
+        {
+          duration: 60000,
+        }
+      );
+    },
+    onError: (error) => {
+      toast.error(_.get(error, 'response.data.message', 'An error occurred'));
+    },
+  });
 
-  const onSubmit = (data: { publicKey: string }) => {
-    faucetCSPRMutation.mutate(data);
+  const onSubmit = (data: FormData) => {
+    switch (data.asset) {
+      case 'CSPR':
+        faucetCSPRMutation.mutate(data);
+        break;
+
+      default:
+        mintTokenMutation.mutate({
+          publicKey: data.publicKey,
+          contractHash:
+            'hash-3cc60d4da76a8c8f32948f77b6dfda736c323ebf87b76837e82420cf5c396d12',
+        });
+    }
   };
 
   useEffect(() => {
@@ -128,6 +169,7 @@ export const FaucetForm = () => {
                       <SelectItem value="CSPR">
                         CSPR {balance ? `(${balance})` : '(...)'}
                       </SelectItem>
+                      <SelectItem value="CD">CasperDash Token</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -136,9 +178,11 @@ export const FaucetForm = () => {
             />
           </CardContent>
           <CardFooter className="flex justify-center gap-10">
-            <Button type="submit">
-              {faucetCSPRMutation.isLoading ? 'Loading...' : 'Request 10 CSPR'}
-            </Button>
+            <SubmitButton
+              isLoading={
+                mintTokenMutation.isLoading || faucetCSPRMutation.isLoading
+              }
+            />
             <Button
               type="button"
               variant={'outline'}

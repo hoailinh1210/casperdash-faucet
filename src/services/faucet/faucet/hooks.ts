@@ -21,7 +21,6 @@ export const useFaucetCSPR = (
   return useMutation({
     ...options,
     mutationFn: faucetCSPR,
-    networkMode: 'offlineFirst',
     onSuccess: async (data, variables, context) => {
       queryClient.invalidateQueries(['jobs']);
       options?.onSuccess?.(data, variables, context);
