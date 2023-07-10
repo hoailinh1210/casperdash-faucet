@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { SubmitButton } from './SubmitButton';
+import { useGetTotalSupply } from '../../hooks/useGetTotalSupply';
 import { useMintToken } from '../../hooks/useMintToken';
 import LogoImg from '@/assets/images/logo.png';
 import { MiddleTruncatedText } from '@/components/common/middle-truncated-text';
@@ -99,6 +100,11 @@ export const FaucetForm = () => {
     },
   });
 
+  const { data: totalSupply = 0 } = useGetTotalSupply({
+    contractHash:
+      'hash-3cc60d4da76a8c8f32948f77b6dfda736c323ebf87b76837e82420cf5c396d12',
+  });
+
   const onSubmit = (data: FormData) => {
     switch (data.asset) {
       case 'CSPR':
@@ -169,7 +175,9 @@ export const FaucetForm = () => {
                       <SelectItem value="CSPR">
                         CSPR {balance ? `(${balance})` : '(...)'}
                       </SelectItem>
-                      <SelectItem value="CD">CasperDash Token</SelectItem>
+                      <SelectItem value="CD">
+                        CasperDash Token ({1_000_000_000 - totalSupply})
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

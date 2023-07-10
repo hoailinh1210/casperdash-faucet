@@ -35,7 +35,10 @@ export const useMintToken = (
     ...options,
     mutationFn: async ({ publicKey, contractHash }) => {
       const clPublicKey = CLPublicKey.fromHex(publicKey);
-      const cep18 = new CEP18Client('http://localhost:11101/rpc', NETWORK_NAME);
+      const cep18 = new CEP18Client(
+        'https://node-clarity-testnet.make.services/rpc',
+        NETWORK_NAME
+      );
       const amount = 1000 * 1_000_000_000;
       cep18.setContractHash(contractHash);
 
