@@ -69,7 +69,6 @@ export const useGetAccountBalance = (
     {
       ...options,
       enabled: !!publicKey,
-      refetchOnWindowFocus: true,
     }
   );
 };

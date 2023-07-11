@@ -17,6 +17,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       cacheTime: 1000 * 60 * 60 * 24 * 365 * 100, // 100 years
+      refetchOnWindowFocus: false,
     },
   },
 });

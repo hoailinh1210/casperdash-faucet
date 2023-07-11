@@ -36,6 +36,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Config } from '@/configs/configuration';
 import { useGetAccountBalance } from '@/services/faucet/casperdash/user/hooks';
 import { useFaucetCSPR } from '@/services/faucet/faucet/hooks';
 import { validatePublicKey } from '@/utils/validator';
@@ -63,7 +64,7 @@ export const FaucetForm = () => {
     resolver: zodResolver(validationSchema),
     defaultValues: {
       publicKey: '',
-      asset: 'CSPR',
+      asset: 'cspr',
     },
   });
   const faucetCSPRMutation = useFaucetCSPR({
@@ -101,21 +102,20 @@ export const FaucetForm = () => {
   });
 
   const { data: totalSupply = 0 } = useGetTotalSupply({
-    contractHash:
-      'hash-3cc60d4da76a8c8f32948f77b6dfda736c323ebf87b76837e82420cf5c396d12',
+    contractHash: Config.cdContractHash,
   });
 
   const onSubmit = (data: FormData) => {
     switch (data.asset) {
-      case 'CSPR':
+      case 'cspr':
         faucetCSPRMutation.mutate(data);
         break;
 
       default:
         mintTokenMutation.mutate({
           publicKey: data.publicKey,
-          contractHash:
-            'hash-3cc60d4da76a8c8f32948f77b6dfda736c323ebf87b76837e82420cf5c396d12',
+          contractHash: Config.cdContractHash,
+          assetId: data.asset,
         });
     }
   };
@@ -172,10 +172,10 @@ export const FaucetForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="CSPR">
+                      <SelectItem value="cspr">
                         CSPR {balance ? `(${balance})` : '(...)'}
                       </SelectItem>
-                      <SelectItem value="CD">
+                      <SelectItem value="cd">
                         CasperDash Token ({1_000_000_000 - totalSupply})
                       </SelectItem>
                     </SelectContent>
@@ -185,7 +185,7 @@ export const FaucetForm = () => {
               )}
             />
           </CardContent>
-          <CardFooter className="flex justify-center gap-10">
+          <CardFooter className="flex justify-center gap-10 flex-wrap">
             <SubmitButton
               isLoading={
                 mintTokenMutation.isLoading || faucetCSPRMutation.isLoading

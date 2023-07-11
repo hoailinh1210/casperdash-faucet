@@ -10,11 +10,35 @@ export const getAllJobs = async (): Promise<Job[]> => {
   return request.get('/faucet/jobs');
 };
 
+export const getAccountLock = async ({
+  publicKey,
+  assetId,
+}: GetAccountLockParams): Promise<GetAccountLockResult> => {
+  return request.get(`/faucet/accounts/${publicKey}/${assetId}`);
+};
+
+export const setAccountLock = async ({
+  publicKey,
+  assetId,
+}: GetAccountLockParams): Promise<void> => {
+  return request.post(`/faucet/accounts/${publicKey}/${assetId}`);
+};
+
 export type FaucetCSPRParams = {
   publicKey: string;
 };
 
-export interface Job {
+export type GetAccountLockParams = {
+  assetId: string;
+  publicKey: string;
+};
+
+export type GetAccountLockResult = {
+  isLocked: boolean;
+  ttl: number;
+};
+
+export type Job = {
   id: string;
   name: string;
   data: Data;
@@ -26,18 +50,18 @@ export interface Job {
   returnvalue: Returnvalue;
   finishedOn: number;
   processedOn: number;
-}
+};
 
-export interface Data {
+export type Data = {
   toPublicKeyHex: string;
-}
+};
 
-export interface Opts {
+export type Opts = {
   attempts: number;
   delay: number;
   timestamp: number;
-}
+};
 
-export interface Returnvalue {
+export type Returnvalue = {
   deployHash: string;
-}
+};

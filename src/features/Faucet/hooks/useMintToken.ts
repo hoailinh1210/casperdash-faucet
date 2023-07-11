@@ -8,12 +8,14 @@ import { CLPublicKey, DeployUtil } from 'casper-js-sdk';
 
 import CEP18Client from '@/lib/contracts/cep18/CEP18Client';
 import { deploy } from '@/services/faucet/casperdash/deploy/deploy.service';
+import { useMutateSetAccountLock } from '@/services/faucet/faucet/hooks';
 
 const NETWORK_NAME = 'casper-test';
 
 type UseMintTokenParams = {
   publicKey: string;
   contractHash: `hash-${string}`;
+  assetId?: string;
 };
 
 type UseMintTokenResult = {
@@ -30,6 +32,7 @@ export const useMintToken = (
 ) => {
   const queryClient = useQueryClient();
   const { signAsync } = useSign();
+  const { mutateAsync } = useMutateSetAccountLock();
 
   return useMutation({
     ...options,
@@ -62,10 +65,16 @@ export const useMintToken = (
 
       return {
         deployHash,
+        publicKey,
       };
     },
     onSuccess: async (data, variables, context) => {
-      queryClient.invalidateQueries(['jobs']);
+      await queryClient.invalidateQueries(['jobs']);
+      await mutateAsync({
+        publicKey: data.publicKey,
+        assetId: variables.assetId!,
+      });
+      await queryClient.invalidateQueries(['account_asset_locks']);
       options?.onSuccess?.(data, variables, context);
     },
   });
