@@ -26,7 +26,8 @@ export const useFaucetCSPR = (
     ...options,
     mutationFn: faucetCSPR,
     onSuccess: async (data, variables, context) => {
-      queryClient.invalidateQueries(['jobs']);
+      await queryClient.invalidateQueries(['jobs']);
+      await queryClient.invalidateQueries(['account_asset_locks']);
       options?.onSuccess?.(data, variables, context);
     },
   });
