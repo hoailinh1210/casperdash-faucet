@@ -105,12 +105,23 @@ export const FaucetForm = () => {
     contractHash: Config.cdContractHash,
   });
 
+  const { data: sncTotalSupply = 0 } = useGetTotalSupply({
+    contractHash: Config.sncContractHash,
+  });
+
   const onSubmit = (data: FormData) => {
     switch (data.asset) {
       case 'cspr':
         faucetCSPRMutation.mutate(data);
         break;
+      case 'snc':
+        mintTokenMutation.mutate({
+          publicKey: data.publicKey,
+          contractHash: Config.sncContractHash,
+          assetId: data.asset,
+        });
 
+        break;
       default:
         mintTokenMutation.mutate({
           publicKey: data.publicKey,
@@ -176,7 +187,10 @@ export const FaucetForm = () => {
                         CSPR {balance ? `(${balance})` : '(...)'}
                       </SelectItem>
                       <SelectItem value="cd">
-                        CasperDash Token ({1_000_000_000 - totalSupply})
+                        CasperDash Token ({1_000_000 - totalSupply})
+                      </SelectItem>
+                      <SelectItem value="snc">
+                        Selvyn Nodule Coin ({100_000_000_000 - sncTotalSupply})
                       </SelectItem>
                     </SelectContent>
                   </Select>
