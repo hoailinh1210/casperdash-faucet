@@ -21,7 +21,7 @@ To run CasperDash locally, follow the instructions below:
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/casperdash.git
+git clone https://github.com/hoailinh1210/casperdash-faucet.git
 ```
 
 2. Install the dependencies using npm or yarn:
