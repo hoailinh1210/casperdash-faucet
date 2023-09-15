@@ -21,7 +21,7 @@ export const setAccountLock = async ({
   publicKey,
   assetId,
   deployHash,
-}: GetAccountLockParams): Promise<void> => {
+}: UpdateAccountLockParams): Promise<void> => {
   return request.post(`/faucet/accounts/${publicKey}/${assetId}`, {
     deployHash,
   });
@@ -42,6 +42,11 @@ export type FaucetCSPRParams = {
 };
 
 export type GetAccountLockParams = {
+  assetId: string;
+  publicKey: string;
+};
+
+export type UpdateAccountLockParams = {
   assetId: string;
   publicKey: string;
   deployHash: string;

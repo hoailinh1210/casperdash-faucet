@@ -17,6 +17,7 @@ import {
   getHistories,
   Job,
   setAccountLock,
+  UpdateAccountLockParams,
 } from './faucet.service';
 
 export const useFaucetCSPR = (
@@ -47,7 +48,12 @@ export const useGetAllJobs = (
 };
 
 export const useMutateSetAccountLock = (
-  options?: UseMutationOptions<unknown, unknown, GetAccountLockParams, unknown>
+  options?: UseMutationOptions<
+    unknown,
+    unknown,
+    UpdateAccountLockParams,
+    unknown
+  >
 ) => {
   return useMutation({
     ...options,
