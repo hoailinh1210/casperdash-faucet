@@ -31,6 +31,8 @@ export const useFaucetCSPR = (
     onSuccess: async (data, variables, context) => {
       await queryClient.invalidateQueries(['jobs']);
       await queryClient.invalidateQueries(['account_asset_locks']);
+      await queryClient.invalidateQueries(['histories']);
+
       options?.onSuccess?.(data, variables, context);
     },
   });
