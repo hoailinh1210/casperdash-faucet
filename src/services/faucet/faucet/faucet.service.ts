@@ -24,6 +24,12 @@ export const setAccountLock = async ({
   return request.post(`/faucet/accounts/${publicKey}/${assetId}`);
 };
 
+export const getContractPackageSupply = async ({
+  contractPackageHash,
+}: GetContractPackageParams): Promise<GetContractPackageResult> => {
+  return request.get(`/faucet/contract-packages/${contractPackageHash}/supply`);
+};
+
 export type FaucetCSPRParams = {
   publicKey: string;
 };
@@ -64,4 +70,12 @@ export type Opts = {
 
 export type Returnvalue = {
   deployHash: string;
+};
+
+export type GetContractPackageParams = {
+  contractPackageHash: string;
+};
+
+export type GetContractPackageResult = {
+  totalSupply: string;
 };

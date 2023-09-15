@@ -15,6 +15,7 @@ export const SubmitButton = ({ isLoading }: Props) => {
       type="submit"
       className={clsx({
         'min-w-[310px]': isRunning,
+        uppercase: true,
       })}
       disabled={isDisabled}
     >

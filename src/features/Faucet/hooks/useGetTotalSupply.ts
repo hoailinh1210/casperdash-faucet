@@ -1,15 +1,14 @@
 import { UseQueryOptions, useQuery } from '@tanstack/react-query';
 
-import CEP18Client from '@/lib/contracts/cep18/CEP18Client';
-
-const NETWORK_NAME = 'casper-test';
+import { toCSPR } from '@/services/faucet/casperdash/user/hooks';
+import { getContractPackageSupply } from '@/services/faucet/faucet/faucet.service';
 
 type Params = {
-  contractHash: `hash-${string}`;
+  contractPackageHash: string;
 };
 
 export const useGetTotalSupply = (
-  { contractHash }: Params,
+  { contractPackageHash }: Params,
   options?: Omit<
     UseQueryOptions<
       number,
@@ -21,21 +20,17 @@ export const useGetTotalSupply = (
   >
 ) => {
   return useQuery(
-    ['total_supply', contractHash],
+    ['total_supply', contractPackageHash],
     async () => {
-      const cep18 = new CEP18Client(
-        'https://airdrop.casperdash.io/v1/proxy/rpc',
-        NETWORK_NAME
-      );
-      cep18.setContractHash(contractHash);
+      const { totalSupply } = await getContractPackageSupply({
+        contractPackageHash: contractPackageHash,
+      });
 
-      const totalSupply = await cep18.totalSupply();
-
-      return totalSupply.toNumber() / 1_000_000_000;
+      return toCSPR(totalSupply);
     },
     {
       ...options,
-      enabled: !!contractHash,
+      enabled: !!contractPackageHash,
       refetchOnWindowFocus: true,
     }
   );

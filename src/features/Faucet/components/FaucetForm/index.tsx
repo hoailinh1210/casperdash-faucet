@@ -102,11 +102,11 @@ export const FaucetForm = () => {
   });
 
   const { data: totalSupply = 0 } = useGetTotalSupply({
-    contractHash: Config.cdContractHash,
+    contractPackageHash: Config.contracts.cd.contractPackageHash,
   });
 
   const { data: sncTotalSupply = 0 } = useGetTotalSupply({
-    contractHash: Config.sncContractHash,
+    contractPackageHash: Config.contracts.snc.contractPackageHash,
   });
 
   const onSubmit = (data: FormData) => {
@@ -117,7 +117,7 @@ export const FaucetForm = () => {
       case 'snc':
         mintTokenMutation.mutate({
           publicKey: data.publicKey,
-          contractHash: Config.sncContractHash,
+          contractHash: Config.contracts.snc.hash,
           assetId: data.asset,
         });
 
@@ -125,7 +125,7 @@ export const FaucetForm = () => {
       default:
         mintTokenMutation.mutate({
           publicKey: data.publicKey,
-          contractHash: Config.cdContractHash,
+          contractHash: Config.contracts.cd.hash,
           assetId: data.asset,
         });
     }
