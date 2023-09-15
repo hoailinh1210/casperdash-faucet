@@ -9,10 +9,12 @@ import {
 import {
   faucetCSPR,
   FaucetCSPRParams,
+  FaucetHistory,
   getAccountLock,
   GetAccountLockParams,
   GetAccountLockResult,
   getAllJobs,
+  getHistories,
   Job,
   setAccountLock,
 } from './faucet.service';
@@ -77,4 +79,15 @@ export const useGetAccountAssetLock = (
       refetchOnWindowFocus: false,
     }
   );
+};
+
+export const useGetFauceHistories = (
+  options?: Omit<
+    UseQueryOptions<FaucetHistory[], unknown, FaucetHistory[], [string]>,
+    'queryKey' | 'queryFn'
+  >
+) => {
+  return useQuery(['histories'], () => getHistories(), {
+    ...options,
+  });
 };

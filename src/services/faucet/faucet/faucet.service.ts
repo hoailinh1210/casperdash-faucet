@@ -20,14 +20,21 @@ export const getAccountLock = async ({
 export const setAccountLock = async ({
   publicKey,
   assetId,
+  deployHash,
 }: GetAccountLockParams): Promise<void> => {
-  return request.post(`/faucet/accounts/${publicKey}/${assetId}`);
+  return request.post(`/faucet/accounts/${publicKey}/${assetId}`, {
+    deployHash,
+  });
 };
 
 export const getContractPackageSupply = async ({
   contractPackageHash,
 }: GetContractPackageParams): Promise<GetContractPackageResult> => {
   return request.get(`/faucet/contract-packages/${contractPackageHash}/supply`);
+};
+
+export const getHistories = async (): Promise<FaucetHistory[]> => {
+  return request.get('/faucet/histories');
 };
 
 export type FaucetCSPRParams = {
@@ -37,6 +44,7 @@ export type FaucetCSPRParams = {
 export type GetAccountLockParams = {
   assetId: string;
   publicKey: string;
+  deployHash: string;
 };
 
 export type GetAccountLockResult = {
@@ -78,4 +86,14 @@ export type GetContractPackageParams = {
 
 export type GetContractPackageResult = {
   totalSupply: string;
+};
+
+export type FaucetHistory = {
+  id: string;
+  toPublicKey: string;
+  status: string;
+  deployHash: string;
+  amount: number;
+  symbol: string;
+  createdAt: string;
 };

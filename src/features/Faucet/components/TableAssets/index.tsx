@@ -5,8 +5,8 @@ import dayjs from 'dayjs';
 
 import { DataTable } from '@/components/common/data-table';
 import { MiddleTruncatedText } from '@/components/common/middle-truncated-text';
-import { Job } from '@/services/faucet/faucet/faucet.service';
-import { useGetAllJobs } from '@/services/faucet/faucet/hooks';
+import { FaucetHistory } from '@/services/faucet/faucet/faucet.service';
+import { useGetFauceHistories } from '@/services/faucet/faucet/hooks';
 
 type JobItem = {
   date: string;
@@ -31,9 +31,11 @@ const columns: ColumnDef<JobItem>[] = [
       return (
         <div className="text-left">
           <a
+            target="_blank"
             href={`https://testnet.cspr.live/account/${row.getValue(
               'publicKey'
             )}`}
+            rel="noreferrer"
           >
             <MiddleTruncatedText>
               {row.getValue('publicKey')}
@@ -58,9 +60,11 @@ const columns: ColumnDef<JobItem>[] = [
       return (
         <div className="text-left">
           <a
+            target="_blank"
             href={`https://testnet.cspr.live/deploy/${row.getValue(
               'deployHash'
             )}`}
+            rel="noreferrer"
           >
             <MiddleTruncatedText>
               {row.getValue('deployHash')}
@@ -80,27 +84,18 @@ const columns: ColumnDef<JobItem>[] = [
 ];
 
 export const TableAssets = () => {
-  const { data } = useGetAllJobs({});
+  const { data } = useGetFauceHistories({});
 
   const jobItems: JobItem[] = useMemo(() => {
     if (!data) return [];
 
-    return data.map((item: Job): JobItem => {
-      let status = 'Pending';
-      if (item.finishedOn) {
-        if (!item.returnvalue) {
-          status = 'Failed';
-        } else {
-          status = 'Success';
-        }
-      }
-
+    return data.map((item: FaucetHistory): JobItem => {
       return {
-        date: dayjs(item.timestamp).format('DD/MM/YYYY'),
-        publicKey: item.data.toPublicKeyHex,
-        totalAmount: '10 CSPR',
-        status: status,
-        deployHash: item.returnvalue ? item.returnvalue.deployHash : '',
+        date: dayjs(item.createdAt).format('DD/MM/YYYY'),
+        publicKey: item.toPublicKey,
+        totalAmount: `${item.amount} ${item.symbol}`,
+        status: item.status,
+        deployHash: item.deployHash ? item.deployHash : '',
       };
     });
   }, [data]);

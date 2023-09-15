@@ -73,8 +73,10 @@ export const useMintToken = (
       await mutateAsync({
         publicKey: data.publicKey,
         assetId: variables.assetId!,
+        deployHash: data.deployHash,
       });
       await queryClient.invalidateQueries(['account_asset_locks']);
+      await queryClient.invalidateQueries(['histories']);
       options?.onSuccess?.(data, variables, context);
     },
   });
