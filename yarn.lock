@@ -52,28 +52,28 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@casperdash/usewallet-core@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@casperdash/usewallet-core/-/usewallet-core-0.0.6.tgz#a25e5195b5df7ed408e070ab6714af276d21c8b1"
-  integrity sha512-48KDAEtKSzJl5zrp5ULypHUBHheOoV5AzQdECzVwtOvQgf9fsKLgHflvJztXNNhZSIX3IJjSSQ3duES8hK3fKg==
+"@casperdash/usewallet-core@1.0.0-next.0":
+  version "1.0.0-next.0"
+  resolved "https://registry.yarnpkg.com/@casperdash/usewallet-core/-/usewallet-core-1.0.0-next.0.tgz#a003e361a2dbc6f799da9f444346478ef93dfac1"
+  integrity sha512-aG1YG/OiDzlxigHoHkyxqjMrjVDU/ioFIBQ/nzpMq7+8DvuXcAuVArHox+N36ydzgSIdekPeb7xjJZuL1OHF8Q==
   dependencies:
-    casper-js-sdk "^2.10.1"
+    casper-js-sdk "^2.13.3"
     eventemitter3 "^5.0.0"
     typedjson "^1.8.0"
     zustand "^4.3.2"
 
-"@casperdash/usewallet@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@casperdash/usewallet/-/usewallet-0.0.6.tgz#3e54c823af3010ea8da23c05fa91246cacbad060"
-  integrity sha512-mkBpCQENnmCJF5Pf0X4AXrmim5Aq2TwoMY9rF9fweryuBgnI+bazPRuFchbVmEewuisLGf/nxFAfxaqsGJSfvg==
+"@casperdash/usewallet@^1.0.0-next.0":
+  version "1.0.0-next.0"
+  resolved "https://registry.yarnpkg.com/@casperdash/usewallet/-/usewallet-1.0.0-next.0.tgz#c7a104f452cb1f43c22453e0ae1e82332e3c5926"
+  integrity sha512-zIE30ELOyJ7taAsP97QH9JZC0RsdUgz7mtwR0L2KDZjk4gfXOCH3Cy8xDQ0zCNVjALxdWVca4WRPB+qLtPifhQ==
   dependencies:
-    "@casperdash/usewallet-core" "0.0.6"
-    "@tanstack/query-core" "^4.22.0"
-    "@tanstack/query-sync-storage-persister" "^4.22.0"
-    "@tanstack/react-query" "^4.22.3"
-    "@tanstack/react-query-persist-client" "^4.22.3"
-    react "^18.2.0"
-    react-dom "^18.2.0"
+    "@casperdash/usewallet-core" "1.0.0-next.0"
+    "@tanstack/query-core" "4.35.3"
+    "@tanstack/query-sync-storage-persister" "4.35.3"
+    "@tanstack/react-query" "4.35.3"
+    "@tanstack/react-query-persist-client" "^4.35.5"
+    react "18.2.0"
+    react-dom "18.2.0"
 
 "@esbuild/android-arm64@0.17.19":
   version "0.17.19"
@@ -785,33 +785,46 @@
     "@swc/core-win32-ia32-msvc" "1.3.67"
     "@swc/core-win32-x64-msvc" "1.3.67"
 
-"@tanstack/query-core@4.29.19", "@tanstack/query-core@^4.22.0":
+"@tanstack/query-core@4.29.19":
   version "4.29.19"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.29.19.tgz#49ccbd0606633d1e55baf3b91ab7cc7aef411b1d"
   integrity sha512-uPe1DukeIpIHpQi6UzIgBcXsjjsDaLnc7hF+zLBKnaUlh7jFE/A+P8t4cU4VzKPMFB/C970n/9SxtpO5hmIRgw==
 
-"@tanstack/query-persist-client-core@4.29.19":
-  version "4.29.19"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.29.19.tgz#c0cd03eca74d33e5aa40c95cadd5585620ff2320"
-  integrity sha512-rr6p3xwEZCz3cEDZsj3QGePf6PG44WxRUGQVcm2JFPZOq9TkG/0i5+hQ3STiHm1Fj6qwCH8xIi62L8kG0zRj/Q==
-  dependencies:
-    "@tanstack/query-core" "4.29.19"
+"@tanstack/query-core@4.35.3":
+  version "4.35.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.35.3.tgz#1c127e66b4ad1beeac052db83a812d7cb67369e1"
+  integrity sha512-PS+WEjd9wzKTyNjjQymvcOe1yg8f3wYc6mD+vb6CKyZAKvu4sIJwryfqfBULITKCla7P9C4l5e9RXePHvZOZeQ==
 
-"@tanstack/query-sync-storage-persister@^4.22.0":
-  version "4.29.19"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.29.19.tgz#292d33cdc9b38b11127f2f07b1935a73039cbba4"
-  integrity sha512-B3wDl3D3YBFTlY2yeXecEh4NEG/8Hr8pqsxnWJijRwBqvOKlqD4bUgk5kl5nbn1mShD2vnQ+yvH900/11X29Zw==
+"@tanstack/query-persist-client-core@4.35.3":
+  version "4.35.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.35.3.tgz#61a57d9360cb35a75acb57f96795071dd1c4611e"
+  integrity sha512-UlUMsvmy12qgPzphIq8iyFtwxuv/vaEyFQEFDVVCvyrqj2G020qMZiCA1vj3+gasmCXh59EraiC2eY4Iqo0/PA==
   dependencies:
-    "@tanstack/query-persist-client-core" "4.29.19"
+    "@tanstack/query-core" "4.35.3"
 
-"@tanstack/react-query-persist-client@^4.22.3":
-  version "4.29.19"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.29.19.tgz#27b24ec5c8983894d6f23450e2f922d07f47706f"
-  integrity sha512-LfcasTosdnI9K66HTP0Rk72Ypza3tCgrcF9bc2qFlKsBleYOYo8bz7/GiiOHj1SQH4GRQlKB+P4+/it+qlJg4g==
+"@tanstack/query-sync-storage-persister@4.35.3":
+  version "4.35.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.35.3.tgz#0b5be86608e1448dacc17fbb88270dd4c257b9bc"
+  integrity sha512-q9axt4iJkRnhR9R9qou+Q2+T2S21jwgf/7carYs9DQGLoE9r9YnwxgbmDE72yQd1glcsGF26UqqO6WO8ziNCrQ==
   dependencies:
-    "@tanstack/query-persist-client-core" "4.29.19"
+    "@tanstack/query-persist-client-core" "4.35.3"
 
-"@tanstack/react-query@^4.22.3", "@tanstack/react-query@^4.29.19":
+"@tanstack/react-query-persist-client@^4.35.5":
+  version "4.35.5"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.35.5.tgz#095258f30382efa643441fb76185bac2c55c9f41"
+  integrity sha512-d8pFzvMD6AD2guGXLP2A4r0mfCRuZ8C4VMBl5+EZvka/e4o9/DRfizZB4S9w0Za+sOQJ4/SdD3OOk2BwYEykkQ==
+  dependencies:
+    "@tanstack/query-persist-client-core" "4.35.3"
+
+"@tanstack/react-query@4.35.3":
+  version "4.35.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.35.3.tgz#03d726ef6a19d426166427c6539b003dd9606d1b"
+  integrity sha512-UgTPioip/rGG3EQilXfA2j4BJkhEQsR+KAbF+KIuvQ7j4MkgnTCJF01SfRpIRNtQTlEfz/+IL7+jP8WA8bFbsw==
+  dependencies:
+    "@tanstack/query-core" "4.35.3"
+    use-sync-external-store "^1.2.0"
+
+"@tanstack/react-query@^4.29.19":
   version "4.29.19"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.29.19.tgz#6ba187f2d0ea36ae83ff1f67068f53c88ce7b228"
   integrity sha512-XiTIOHHQ5Cw1WUlHaD4fmVUMhoWjuNJlAeJGq7eM4BraI5z7y8WkZO+NR8PSuRnQGblpuVdjClQbDFtwxTtTUw==
@@ -1330,7 +1343,7 @@ caniuse-lite@^1.0.30001464, caniuse-lite@^1.0.30001503:
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001509.tgz"
   integrity sha512-2uDDk+TRiTX5hMcUYT/7CSyzMZxjfGu0vAUjS2g0LSD8UoXOv0LtpH4LxGMemsiPq6LCVIUjNwVM0erkOkGCDA==
 
-casper-js-sdk@^2.10.1, casper-js-sdk@^2.13.3:
+casper-js-sdk@^2.13.3:
   version "2.13.3"
   resolved "https://registry.yarnpkg.com/casper-js-sdk/-/casper-js-sdk-2.13.3.tgz#8a846dcca773bb7c83b6da2e84381802d88fa723"
   integrity sha512-//AOGj62GlDjiHX4a5dE3s0DaBu3CmPjrtDQOSeoLRMPy4vyQsXpLyaQpuQ8Q4JAnbqV2ySeON1edAfssN04pw==
@@ -2953,9 +2966,9 @@ queue-microtask@^1.2.2:
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
 
-react-dom@^18.2.0:
+react-dom@18.2.0, react-dom@^18.2.0:
   version "18.2.0"
-  resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.2.0.tgz#22aaf38708db2674ed9ada224ca4aa708d821e3d"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
   dependencies:
     loose-envify "^1.1.0"
@@ -3004,9 +3017,9 @@ react-style-singleton@^2.2.1:
     invariant "^2.2.4"
     tslib "^2.0.0"
 
-react@^18.2.0:
+react@18.2.0, react@^18.2.0:
   version "18.2.0"
-  resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
   dependencies:
     loose-envify "^1.1.0"
